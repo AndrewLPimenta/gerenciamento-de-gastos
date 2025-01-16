@@ -7,12 +7,11 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* Substituindo o Switch por Routes */}
         <Routes>
           {/* Página Principal */}
-          <Route path="/" element={<HomePage />} />
+          <Route path="./pages/HomePage.js" element={<HomePage />} />
           {/* Página de Gestão de Gastos */}
-          <Route path="/gestao-gastos" element={<TransactionPage />} />
+          <Route path="./pages/TransactionPage.js" element={<TransactionPage />} />
         </Routes>
       </div>
     </Router>
