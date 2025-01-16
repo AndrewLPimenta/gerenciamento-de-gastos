@@ -15,14 +15,17 @@ function HomePage() {
     return (
         <main>
             <div className="home-page">
-            <Header />
+                <Header />
                 <div className={`banner ${isVisible ? 'show' : ''}`}>
                     <div className="banner-content">
                         <h2>Bem-vindo à Gestão de Gastos!</h2>
-                        <p>Essa é a página inicial do aplicativo. Clique abaixo para acessar a página de Gestão de Gastos.</p>
-                        <button className="link-software" onClick={() => window.location.href = '/gestao-gastos'}>
-                            Ir para a Gestão de Gastos
-                        </button>
+                        <p>Essa é a página inicial do aplicativo. Clique abaixo para acessar a página de Gestão de Gastos.</p>             
+                        {/* Usando Link ao invés de window.location.href */}
+                        <Link to="TransactionPage">
+                            <button className="link-software">
+                                Ir para a Gestão de Gastos
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>
