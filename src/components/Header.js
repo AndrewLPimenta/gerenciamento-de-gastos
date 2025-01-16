@@ -1,9 +1,15 @@
 import React from "react";
+import '../index.css'
 
 export default function Header() {
     return (
-        <div>
-            <h1></h1>
+        <div className="links">
+            <nav>
+                <a>Sobre</a>
+                <a>Home</a>
+                <a>Contato</a>
+            </nav>
         </div>
-    ) 
+    )
 }
+

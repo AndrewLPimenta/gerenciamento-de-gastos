@@ -1,17 +1,44 @@
-body {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  padding: 20px;
+  background-color: transparent;
+
 }
 
-.app {
-  max-width: 600px;
+div.links {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
   margin: 0 auto;
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  font-weight: 800;
+  color: #fff;
+  z-index: 10;
 }
+
+
+
+.links a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease-in-out;
+  gap: 2rem;
+  margin-right: 4rem;
+}
+
+.links nav a:hover {
+  color: #4CAF50;
+  /* Mudança de cor ao passar o mouse */
+  cursor: pointer;
+}
+
 
 h1 {
   text-align: center;
@@ -26,8 +53,10 @@ input,
 select,
 button {
   margin: 10px 0;
-  padding: 10px;
+  padding: 1rem;
   font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
 }
 
 button {
@@ -64,4 +93,159 @@ li button {
 
 li button:hover {
   background-color: #d32f2f;
+}
+
+/* Lista de transações */
+.transaction-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Estilo do item da lista */
+.transaction-list li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: opacity 500ms ease, transform 500ms ease;
+  /* Transição para entrada e saída */
+  opacity: 1;
+  /* Não começará invisível */
+  transform: scale(1);
+  /* Começa no tamanho normal */
+}
+
+/* Classe de entrada (adiciona animação) */
+.transaction-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Classe de saída (remove o item com animação) */
+.transaction-exit-active {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* src/pages/HomePage.css */
+
+.home-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  /* Ocupa toda a altura da janela */
+  overflow: hidden;
+}
+
+.banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../src/assets/wmremove-transformed.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.banner-content {
+  position: absolute;
+  top: 35%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  text-align: left;
+  color: rgb(255, 255, 255);
+  padding: 20px;
+  max-width: 80%;
+  z-index: 1;
+}
+
+.banner-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  animation: slideIn 1.2s ease-out forwards;
+}
+
+.banner-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+  animation: slideIn 0.8s ease-out forwards;
+}
+
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.link-software {
+  background-color: #70f775;
+  color: rgb(0, 0, 0);
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  /* Remover borda padrão do botão */
+  outline: none;
+  /* Remove o outline ao focar no botão */
+  animation: slideIn 0.8s ease-out forwards;
+  /* Animação de entrada */
+  opacity: 0;
+  /* Começa invisível */
+  transform: translateX(-100%);
+  /* Começa fora da tela */
+}
+
+/* Efeito de hover */
+.link-software:hover {
+  background-color: #4CAF50;
+  /* Cor ao passar o mouse */
+  transition: 1s ease;
+  padding: 13px 26px;
+
+}
+
+link-software:not(:hover) {
+  background-color: #70f775;
+  /* Cor original */
+  padding: 12px 24px;
+  /* Retorna ao tamanho original */
+  transition: 1s ease;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%);
+    /* Inicia fora da tela */
+    opacity: 0;
+    /* Inicialmente invisível */
+  }
+
+  100% {
+    transform: translateX(0);
+    /* Entra na posição final */
+    opacity: 1;
+    /* Fica totalmente visível */
+  }
 }
