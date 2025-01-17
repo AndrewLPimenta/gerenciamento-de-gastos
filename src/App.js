@@ -8,7 +8,7 @@ function App() {
     <Router> {/* Envolvendo todo o conteúdo com Router */}
       <Routes> {/* Configurando as rotas */}
         <Route path="/" element={<HomePage />} /> {/* Página inicial */}
-        <Route path="TransactionPage" element={<TransactionPage />} /> {/* Página de gestão de gastos */}
+        <Route path="/TransactionPage" element={<TransactionPage />} /> {/* Página de gestão de gastos */}
       </Routes>
     </Router>
   );

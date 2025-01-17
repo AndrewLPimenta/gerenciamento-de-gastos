@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../index.css";
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -11,9 +12,9 @@ export default function Header() {
         <nav>
             {/* Links visíveis no desktop */}
             <div className="links">
-                <a className="links-nav" href="#">Sobre</a>
-                <a className="links-nav" href="#">Home</a>
-                <a className="links-nav" href="#">Contato</a>
+                <a className="links-nav" href=".">Sobre</a>
+                <Link className="links-nav" to="/">Home</Link>
+                <a className="links-nav" to="../HomePage">Contato</a>
             </div>
 
             {/* Menu hambúrguer visível no mobile */}

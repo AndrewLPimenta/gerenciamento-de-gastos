@@ -5,6 +5,7 @@ import TotalAmount from '../components/TotalAmount'; // Componente de total de g
 import Header from '../components/Header';
 import Suggestion from '../components/Suggestion'; // Importe o componente Suggestion
 import '../index.css';
+import { Link } from 'react-router-dom';
 
 function TransactionPage() {
     const [transactions, setTransactions] = useState([]);
