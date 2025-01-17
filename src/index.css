@@ -1,11 +1,13 @@
+/* Reset global para garantir que tudo esteja consistente */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
   background-color: transparent;
-
+  list-style: none;
 }
+
 
 div.links {
   position: absolute;
@@ -18,11 +20,13 @@ div.links {
   gap: 2rem;
   padding: 2rem;
   font-weight: 800;
-  color: #fff;
+  color: #d81d1d;
   z-index: 10;
 }
 
-
+.nav-links- {
+  display: none;
+}
 
 .links a {
   color: #ffffff;
@@ -31,6 +35,7 @@ div.links {
   transition: color 0.3s ease-in-out;
   gap: 2rem;
   margin-right: 4rem;
+
 }
 
 .links nav a:hover {
@@ -39,96 +44,139 @@ div.links {
   cursor: pointer;
 }
 
+/* Estilos para o mobile */
+@media screen and (max-width: 600px) {
+  .nav-links- {
+    display: block;
+  }
 
-h1 {
-  text-align: center;
+  /* Esconde os links no celular */
+  div.links {
+    display: none;
+  }
+
+  /* Exibe o container do hambúrguer no celular */
+  .burger-container {
+    display: block;
+    z-index: 20;
+    /* Garante que o hambúrguer estará sobre outros elementos */
+  }
+
+  /* Estilos do botão do hambúrguer */
+  .burger {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 30px;
+    background: transparent;
+    cursor: pointer;
+    z-index: 25;
+    /* Garantindo que o botão esteja acima de outros elementos */
+  }
+
+  /* Estilos das barras do hambúrguer */
+  .burger span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: rgb(55, 160, 2);
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transition: .25s ease-in-out;
+  }
+
+  .burger span:nth-of-type(1) {
+    top: 0px;
+    transform-origin: left center;
+  }
+
+  .burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+  }
+
+  .burger span:nth-of-type(3) {
+    top: 100%;
+    transform-origin: left center;
+    transform: translateY(-100%);
+  }
+
+  /* Adicionando a animação quando o menu for aberto */
+  .burger-links {
+    display: none;
+    /* Esconde os links inicialmente */
+    position: absolute;
+    left: 0;
+    background-color: rgba(188, 208, 148, 0.897);
+    /* Fundo escuro */
+    width: 100%;
+    padding: 1rem;
+    text-align: center;
+    height: 100vh;
+    z-index: 15;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    /* Animação de opacidade */
+  }
+
+  /* Quando o menu está aberto, a classe 'open' será aplicada */
+  .burger-links.open {
+    display: block;
+    opacity: 1;
+    /* Exibe os links com animação */
+    animation: slideIn 0.5s ease-out forwards;
+    /* Aplicando animação */
+  }
+
+  /* Transformações das barras quando o menu está aberto */
+  .burger .bar.open:nth-of-type(1) {
+    transform: rotate(45deg);
+    top: 0px;
+    left: 5px;
+  }
+
+  .burger .bar.open:nth-of-type(2) {
+    width: 0%;
+    opacity: 0;
+  }
+
+  .burger .bar.open:nth-of-type(3) {
+    transform: rotate(-45deg);
+    top: 28px;
+    left: 5px;
+  }
+
+  /* Estilos dos links dentro do menu hambúrguer */
+  .burger-links a {
+    display: block;
+    color: #060606;
+    padding: 2rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease-in-out;
+  }
+
+  .burger-links a:hover {
+    color: #4CAF50;
+  }
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-}
+/* Animação para a entrada do menu */
+@keyframes slideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 
-input,
-select,
-button {
-  margin: 10px 0;
-  padding: 1rem;
-  font-size: 1rem;
-  border-radius: 1rem;
-  border: none;
-}
-
-button {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li button {
-  background-color: #f44336;
-  color: white;
-  border: none;
-  cursor: pointer;
-}
-
-li button:hover {
-  background-color: #d32f2f;
-}
-
-/* Lista de transações */
-.transaction-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-/* Estilo do item da lista */
-.transaction-list li {
-  background-color: #f9f9f9;
-  padding: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: opacity 500ms ease, transform 500ms ease;
-  /* Transição para entrada e saída */
-  opacity: 1;
-  /* Não começará invisível */
-  transform: scale(1);
-  /* Começa no tamanho normal */
-}
-
-/* Classe de entrada (adiciona animação) */
-.transaction-enter-active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* Classe de saída (remove o item com animação) */
-.transaction-exit-active {
-  opacity: 0;
-  transform: scale(0.8);
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* src/pages/HomePage.css */
@@ -147,7 +195,7 @@ li button:hover {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url('../src/assets/wmremove-transformed.jpeg');
+  background-image: url('../src/assets/banner-desktop.jpeg');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -162,7 +210,7 @@ li button:hover {
 
 .banner-content {
   position: absolute;
-  top: 35%;
+  top: 33%;
   left: 40%;
   transform: translate(-50%, -50%);
   text-align: left;
@@ -198,40 +246,37 @@ li button:hover {
 }
 
 .link-software {
-  background-color: #70f775;
-  color: rgb(0, 0, 0);
+  color: rgb(250, 250, 250);
   padding: 12px 24px;
   font-size: 1rem;
   border-radius: 1rem;
+  font-weight: 900;
   text-decoration: none;
   cursor: pointer;
   border: none;
-  /* Remover borda padrão do botão */
   outline: none;
-  /* Remove o outline ao focar no botão */
   animation: slideIn 0.8s ease-out forwards;
   /* Animação de entrada */
   opacity: 0;
-  /* Começa invisível */
   transform: translateX(-100%);
-  /* Começa fora da tela */
+  /* Começa invisível e fora da tela */
+  transition: background 1s ease, padding 1s ease, filter 1s ease;
+  /* Transições para hover e alterações de estilo */
 }
 
-/* Efeito de hover */
 .link-software:hover {
-  background-color: #4CAF50;
-  /* Cor ao passar o mouse */
-  transition: 1s ease;
+  /* Efeito de hover */
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, #4CAF50 17.8%, #209123 100.2%);
   padding: 13px 26px;
-
+  /* Aumenta o tamanho do botão */
+  filter: blur(0px);
+  /* Remove o blur */
 }
 
-link-software:not(:hover) {
-  background-color: #70f775;
-  /* Cor original */
-  padding: 12px 24px;
-  /* Retorna ao tamanho original */
-  transition: 1s ease;
+.link-software:not(:hover) {
+  /* Efeito quando não está em hover */
+  background: radial-gradient(circle farthest-corner at 10% 20%, #4CAF50 17.8%, #4CAF50 100.2%);
+
 }
 
 @keyframes slideIn {
@@ -249,3 +294,540 @@ link-software:not(:hover) {
     /* Fica totalmente visível */
   }
 }
+
+button.link-software::after {
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle farthest-corner at 10% 20%, #4CAF50 17.8%, #209123 100.2%);
+  filter: blur(15px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  /* Coloca o pseudo-elemento atrás do botão */
+}
+
+button.link-software:active {
+  /* Efeito quando o botão é pressionado */
+  transform: scale(0.9) rotate(3deg);
+  /* Encolhe e rotaciona */
+  background: radial-gradient(circle farthest-corner at 10% 20%, #4CAF50 17.8%, #4CAF50 100.2%);
+  transition: transform 0.5s ease, background 0.5s ease;
+}
+
+
+@media screen and (max-width: 600px) {
+  .banner-content {
+    top: 46%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    justify-content: center;
+    max-width: 80%;
+    z-index: 1;
+    width: 300px;
+  }
+
+  .banner-content h2 {
+
+    font-size: 1.8rem;
+  }
+
+  .banner {
+    background-image: url('../src/assets/banner-mobile.png');
+
+  }
+}
+
+/* Pagina Dois */
+
+.page-two {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  justify-content: center;
+  margin-top: 5rem;
+  background-color: transparent;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Duas colunas */
+  grid-template-rows: auto auto auto;
+  /* Três linhas: 1 para inputs, 1 para selects + botão e 1 para a tabela e total */
+  gap: 3rem;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.container .inputGroup {
+  grid-column: span 1;
+  /* Cada input ocupará uma coluna */
+}
+
+.container .selectGroup {
+  grid-column: span 1;
+  /* Os selects ocuparão uma coluna cada */
+  display: flex;
+  flex-direction: column;
+  /* Alinha os selects e o botão em uma coluna */
+  gap: 10px;
+  /* Espaçamento entre os selects e o botão */
+}
+
+.container .tableGroup {
+  grid-column: span 2;
+  /* A tabela ocupará duas colunas */
+}
+
+.container .totalGroup {
+  grid-column: span 2;
+  /* A div de total ocupará duas colunas */
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 1rem;
+    grid-template-columns: 1fr;
+    /* Em telas pequenas, todos os elementos ficam em uma coluna */
+    grid-template-rows: auto;
+    /* Apenas uma linha */
+  }
+
+  .container .inputGroup,
+  .container .selectGroup,
+  .container .tableGroup,
+  .container .totalGroup {
+    grid-column: span 1;
+    /* Todos os elementos ocupam uma coluna */
+  }
+}
+
+div.row{
+  gap: 5rem;
+
+}
+
+.form-inputs {
+  display: flex;
+  background-color: transparent;
+  flex-direction: column;
+  gap: 1.5rem; /* Espaçamento entre os campos */
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px; /* Limita a largura máxima */
+  margin: 0 auto; /* Centraliza o formulário */
+}
+
+.transaction-form-page {
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+
+  /* Em telas muito pequenas, como smartphones */
+  .transaction-form-page {
+    justify-content: center;
+    margin-top: 40px;
+  }
+
+  .inputGroup {
+    width: 350px;
+  }
+}
+
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+
+  position: relative;
+}
+
+.inputGroup input {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  width: 100%;
+}
+
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  left: 0;
+  padding: 0.8em;
+  margin-left: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-left: 1.3em;
+  padding: 0.4em;
+  background-color: #fff;
+  border-radius:14px;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+  border-color: rgb(150, 150, 200);
+}
+
+
+.Create-Gest {
+  margin-top: 2rem;
+  box-shadow: 5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  cursor: pointer;
+  border: none;
+  background-color: #4CAF50;
+  border-radius: 0.9em;
+  cursor: pointer;
+  padding: 0.8em 1.2em 0.8em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 16px;
+}
+
+.Create-Gest span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-weight: 600;
+}
+
+.Create-Gest:hover {
+  background-color: #4CAF50;
+}
+
+.Select-Gest {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: 1px solid #c1c1c1;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 5px 5px 10px #bebebe,
+    -5px -5px 10px #ffffff;
+  cursor: pointer;
+  padding: 0.8em 1.2em 0.8em 1em;
+  transition: all ease-in-out 0.2s;
+  font-size: 16px;
+}
+
+.category-group {
+  display: grid;
+  flex-direction: row;
+  gap: 1.5rem;
+  border-radius: 2rem;
+}
+
+.category-group select {
+  text-align: center;
+  gap: 2rem;
+
+}
+
+@media screen and (max-width: 600px) {
+  .category-group {
+    flex-direction: column;
+    gap: 1.2rem;
+
+  }
+
+}
+
+a.links-nav {
+  color: #28d42d;
+}
+
+
+/* Estilos para os selects */
+.container select {
+  border-radius: 20px;
+  border: 2px solid #ccc;
+  background-color: transparent;
+  width: 100%;
+  /* Faz o select ocupar toda a largura disponível */
+  color: #333;
+  /* Cor do texto */
+}
+
+.container select:focus {
+  border-color: #0bc82d;
+  /* Cor da borda ao focar no select */
+  outline: none;
+}
+
+/* Adicionando a seta personalizada */
+.container select::-ms-expand {
+  display: none;
+  /* Para Internet Explorer */
+}
+
+.container select::after {
+  content: "▼";
+  /* Símbolo da seta */
+  font-size: 1.2em;
+  color: #333;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Se você deseja usar um ícone SVG como seta personalizada */
+.select-icon {
+  color: #060606;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.select-wrapper select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 25px;
+  /* Espaço para a seta */
+}
+
+.total-container {
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.total-container h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.total-container p {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+.total-container .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #e57373;
+  transition: transform 0.2s ease;
+}
+
+.total-container .delete-btn:hover {
+  transform: scale(1.1);
+}
+
+.total-container.animate {
+  animation: bounceIn 0.5s ease-out;
+}
+
+/* Animação de Entrada */
+@keyframes bounceIn {
+  0% {
+      transform: scale(0.9);
+      opacity: 0;
+  }
+  60% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+      opacity: 1;
+  }
+}
+
+/* Container para as transações */
+.transaction-graphic {
+  border-radius: 10px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.transaction-list {
+  list-style: none;
+  padding: 0;
+}
+
+.transaction {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.3s ease;
+}
+
+/* Animação de entrada */
+.transaction-enter-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.transaction-exit-active {
+  opacity: 0;
+  transform: scale(0.5);
+}
+
+/* Estilo do botão de deletar */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #e57373;
+  transition: transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  transform: scale(1.2);
+}
+
+/* Aplique a animação no contêiner de transações */
+.transaction-enter-active {
+  animation: fadeIn 0.5s forwards;
+}
+
+.transaction-exit-active {
+  animation: fadeOut 0.5s forwards;
+}
+
+/* Animação de Fade In */
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+      transform: scale(0.9);
+  }
+  100% {
+      opacity: 1;
+      transform: scale(1);
+  }
+}
+
+/* Animação de Fade Out */
+@keyframes fadeOut {
+  0% {
+      opacity: 1;
+      transform: scale(1);
+  }
+  100% {
+      opacity: 0;
+      transform: scale(0.5);
+  }
+}
+
+/* Estilo do container da sugestão */
+.suggestion-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Garantir que fique acima de outros conteúdos */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 300px;
+}
+
+.suggestion {
+  background-color: #f0f8ff;
+  color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(100%); /* Começa fora da tela */
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Animação de entrada da sugestão */
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+/* Animação de saída da sugestão */
+@keyframes slideOut {
+  0% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+  100% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+}
+
+/* Estilo do botão de fechar */
+.close-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+/* Animação de hover no ícone de fechar */
+.close-icon:hover {
+  transform: scale(1.1);
+}
+
