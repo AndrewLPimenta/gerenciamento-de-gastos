@@ -16,7 +16,7 @@ function HomePage() {
                 <Header />
                 <div className={`banner ${isVisible ? 'show' : ''}`}>
                     <div className="banner-content">
-                        <h2>Bem-vindo à Gestão de Gastos!</h2>
+                        <h2 className='Title-Gestao'>Bem-vindo à Gestão de Gastos!</h2>
                         <p>Essa é a página inicial do aplicativo. Clique abaixo para acessar a página de Gestão de Gastos.</p>
                         {/* Usando Link ao invés de window.location.href */}
                         <Link to="TransactionPage">

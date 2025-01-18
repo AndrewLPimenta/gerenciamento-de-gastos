@@ -28,9 +28,11 @@ export default function Header() {
 
                 {/* Links do menu que aparecem quando o hambúrguer é clicado */}
                 <div className={`burger-links ${menuOpen ? "open" : ""}`}>
-                    <a className="nav-links-" href="#">Sobre</a>
-                    <a className="nav-links-" href="#">Home</a>
-                    <a className="nav-links-" href="#">Contato</a>
+                <Link className="links-nav" to="/">Sobre</Link>
+                    <Link className="links-nav" to="/">Home</Link>
+                    <Link className="links-nav" to="/">Contato</Link>
+                    <Link className="links-nav" to="/">Desenvolvido por Andrew</Link>
+
                 </div>
             </div>
         </nav>

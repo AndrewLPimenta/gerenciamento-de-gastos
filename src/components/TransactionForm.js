@@ -7,6 +7,7 @@ function TransactionForm({ addTransaction }) {
     const [type, setType] = useState("");
     const [category, setCategory] = useState("");
     const [source, setSource] = useState("");  // Adicionando o estado para 'source'
+    const [error, setError] = useState("");  // Para armazenar mensagens de erro
 
     // Função para tratar a entrada de valor no campo 'amount'
     const handleAmountChange = (e) => {
@@ -25,6 +26,12 @@ function TransactionForm({ addTransaction }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        // Validação: Verificar se todos os campos obrigatórios foram preenchidos
+        if (!description || !amount || !type || (type === "expense" && !category) || (type === "income" && !source)) {
+            setError("Por favor, preencha todos os campos obrigatórios.");
+            return;  // Não envia se algum campo estiver faltando
+        }
+
         // Remover o valor formatado do "R$" caso tenha sido colocado, e preparar para ser salvo
         const formattedAmount = amount.replace(',', '.');  // Garantir que a vírgula seja convertida para ponto
 
@@ -33,8 +40,8 @@ function TransactionForm({ addTransaction }) {
             description,
             amount: parseFloat(formattedAmount),  // Convertendo para número
             type,
-            category,
-            source,  // Incluindo a origem no objeto
+            category: type === "expense" ? category : "Sem categoria",  // Categoria obrigatória apenas para 'expense'
+            source: type === "income" ? source : "Sem origem",  // Fonte obrigatória apenas para 'income'
         };
 
         addTransaction(newTransaction);  // Envia a nova transação
@@ -42,37 +49,31 @@ function TransactionForm({ addTransaction }) {
         // Resetando os campos após o envio
         setDescription("");
         setAmount("");
-        setType("expense");
+        setType("");
         setCategory("");
         setSource("");
+        setError("");  // Limpa a mensagem de erro
     };
 
     // Função que trata o campo 'source'
     const handleSourceChange = (e) => {
         const selectedSource = e.target.value;
         setSource(selectedSource);
-
-        // Alerta se "Gastei" for selecionado e source estiver vazio
-        if (type === "expense" && selectedSource !== "") {
-            alert("Você selecionou de onde o dinheiro veio. Lembre-se de que você está marcando um gasto.");
-        }
     };
 
     // Função que trata o campo 'category'
     const handleCategoryChange = (e) => {
         const selectedCategory = e.target.value;
         setCategory(selectedCategory);
-
-        // Alerta se "Ganhei" for selecionado e category estiver vazio
-        if (type === "income" && selectedCategory !== "") {
-            alert("Você selecionou uma categoria para um ganho. Lembre-se de que a categoria não é relevante para este tipo de transação.");
-        }
     };
 
     return (
         <div className="transaction-form-page">
             <form className="form-inputs" onSubmit={handleSubmit}>
-                <h2>Adicionar Transação</h2>
+                <h2>Cuide de suas Finanaças!</h2>
+
+                {/* Exibição de erro */}
+                {error && <div className="error-message">{error}</div>}
 
                 {/* Campo para a descrição */}
                 <div className="inputGroup">

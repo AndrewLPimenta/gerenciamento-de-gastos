@@ -8,6 +8,10 @@
   list-style: none;
 }
 
+.Title-Gestao{
+  font-weight: 900;
+  color: #fff;
+}
 
 div.links {
   position: absolute;
@@ -24,9 +28,22 @@ div.links {
   z-index: 10;
 }
 
-.nav-links- {
+.burger-links{
   display: none;
 }
+
+
+@media screen and (max-width: 600px) {
+  .burger-links{
+    display: block;
+  }
+  
+}
+
+Link .links-nav{
+  display: none;
+}
+
 
 .links a {
   color: #ffffff;
@@ -112,7 +129,7 @@ div.links {
     /* Esconde os links inicialmente */
     position: absolute;
     left: 0;
-    background-color: rgba(188, 208, 148, 0.897);
+    background-color: rgb(0, 0, 0);
     /* Fundo escuro */
     width: 100%;
     padding: 1rem;
@@ -423,11 +440,10 @@ div.row{
   width: 100%;
   max-width: 600px; /* Limita a largura máxima */
   margin: 0 auto; /* Centraliza o formulário */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
 }
 
-.transaction-form-page {
-  justify-content: center;
-}
 
 @media (max-width: 768px) {
 
@@ -460,7 +476,7 @@ div.row{
 
 .inputGroup input {
   font-size: 100%;
-  padding: 0.8em;
+  padding: 1.2em;
   outline: none;
   border: 1px solid rgb(200, 200, 200);
   border-radius: 30px;
@@ -491,7 +507,7 @@ div.row{
 }
 
 .inputGroup :is(input:focus, input:valid) {
-  border-color: rgb(150, 150, 200);
+  border-color: rgb(90, 169, 111);
 }
 
 
@@ -629,7 +645,7 @@ a.links-nav {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 300px;
+  width: 350px;
   margin: 0 auto;
 }
 
@@ -676,158 +692,455 @@ a.links-nav {
   }
 }
 
-/* Container para as transações */
+
+
+
+/* Estilo para a lista de transações */
 .transaction-graphic {
-  border-radius: 10px;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-top: 20px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
+h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Lista de transações */
 .transaction-list {
   list-style: none;
   padding: 0;
+  margin: 0;
 }
-
+/* Lista de transações */
+.transaction-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .transaction {
+  display: grid;
+  grid-template-columns: 1fr 60px; /* Primeira coluna para a descrição, segunda para o botão de deletar */
+  grid-template-rows: auto; /* Apenas uma linha para as transações */
+  grid-gap: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  border-radius: 18px;
+  margin-bottom: 15px;
+  padding: 20px;
+  text-align: justify;
+}
+
+/* Informações da transação */
+.transaction-info {
   display: flex;
+  flex-direction: column; /* Alinha a descrição na coluna */
   justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  transform: scale(0.9);
-  transition: all 0.3s ease;
 }
 
-/* Animação de entrada */
-.transaction-enter-active {
-  opacity: 1;
-  transform: scale(1);
+/* Descrição da transação (primeira linha) */
+.transaction-description {
+  grid-column: 1 / span 2; /* A descrição ocupa a primeira coluna e a segunda */
+  font-size: 18px;
+  color: #333;
+  font-weight: 600;
 }
 
-.transaction-exit-active {
-  opacity: 0;
-  transform: scale(0.5);
+/* Detalhes da transação: valor, categoria e tipo (alinhados horizontalmente) */
+.transaction-details {
+  display: flex;
+  justify-content: space-between; /* Alinha os itens na horizontal */
+  grid-column: 1 / 2; /* Coloca os detalhes na primeira coluna */
+  width: 100%; /* Garante que ocupe toda a largura disponível */
 }
 
-/* Estilo do botão de deletar */
+/* Valor da transação */
+.transaction-amount {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* Categoria da transação */
+.transaction-category {
+  font-size: 18px;
+  color: #333;
+}
+
+/* Tipo da transação (Entrada ou Despesa) */
+.transaction-type {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: right; /* Alinha à direita */
+}
+
+/* Estilo para 'Entrada' */
+.transaction-type.income {
+  text-shadow: 1px 1px 5px rgba(0, 255, 0, 0.5); /* Sombras verdes para 'Entrada' */
+  color: #28a745;
+}
+
+/* Estilo para 'Despesa' */
+.transaction-type.expense {
+  text-shadow: 1px 1px 5px rgba(255, 0, 0, 0.5); /* Sombras vermelhas para 'Despesa' */
+  color: #dc3545;
+}
+
+/* Botão de deletar */
 .delete-btn {
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
-  color: #e57373;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease-in-out;
+  justify-self: center;
 }
 
 .delete-btn:hover {
-  transform: scale(1.2);
-}
-
-/* Aplique a animação no contêiner de transações */
-.transaction-enter-active {
-  animation: fadeIn 0.5s forwards;
-}
-
-.transaction-exit-active {
-  animation: fadeOut 0.5s forwards;
-}
-
-/* Animação de Fade In */
-@keyframes fadeIn {
-  0% {
-      opacity: 0;
-      transform: scale(0.9);
-  }
-  100% {
-      opacity: 1;
-      transform: scale(1);
-  }
-}
-
-/* Animação de Fade Out */
-@keyframes fadeOut {
-  0% {
-      opacity: 1;
-      transform: scale(1);
-  }
-  100% {
-      opacity: 0;
-      transform: scale(0.5);
-  }
-}
-
-/* Estilo do container da sugestão */
-.suggestion-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000; /* Garantir que fique acima de outros conteúdos */
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  width: 300px;
-}
-
-.suggestion {
-  background-color: #f0f8ff;
-  color: #333;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  opacity: 0;
-  transform: translateX(100%); /* Começa fora da tela */
-  animation: slideIn 0.5s ease-out forwards;
-}
-
-/* Animação de entrada da sugestão */
-@keyframes slideIn {
-  0% {
-      opacity: 0;
-      transform: translateX(100%);
-  }
-  100% {
-      opacity: 1;
-      transform: translateX(0);
-  }
-}
-
-/* Animação de saída da sugestão */
-@keyframes slideOut {
-  0% {
-      opacity: 1;
-      transform: translateX(0);
-  }
-  100% {
-      opacity: 0;
-      transform: translateX(100%);
-  }
-}
-
-/* Estilo do botão de fechar */
-.close-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 5px;
-}
-
-.close-icon {
-  width: 20px;
-  height: 20px;
-  transition: transform 0.2s ease;
-}
-
-/* Animação de hover no ícone de fechar */
-.close-icon:hover {
   transform: scale(1.1);
 }
 
+
+/* Animação de entrada */
+.transaction-enter-active {
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
+/* Animação de saída */
+.transaction-exit-active {
+  animation: slideOut 0.5s ease-in-out forwards;
+}
+
+
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* Botão de deletar */
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  justify-self: center;
+}
+
+.delete-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Estilo para transações de entrada */
+.transaction.income {
+  color: #28a745; /* Verde */
+  font-size: 20px;  /* Tamanho maior para entradas */
+}
+
+/* Estilo para transações de saída */
+.transaction.expense {
+  color: #dc3545; /* Vermelho */
+  font-size: 20px;  /* Tamanho maior para saídas */
+}
+
+/* Animação de entrada */
+.transaction-enter-active {
+  animation: slideIn 0.5s ease-in-out forwards;
+}
+
+/* Animação de saída */
+.transaction-exit-active {
+  animation: slideOut 0.5s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+}
+
+
+
+
+
+/* estilizações de Em Breve  */
+
+/* Estilo do título (com animação) */
+.animated-text {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+  animation: textPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+  0% {
+    color: #333;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+  50% {
+    color: #1eb22a;
+    text-shadow: 0 0 10px rgba(0, 0, 255, 0.5);
+  }
+  100% {
+    color: #333;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 30px;
+}
+
+.modelViewPort {
+  perspective: 1000px;
+  width: 20rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  overflow: hidden;
+}
+
+.eva {
+  --EVA-ROTATION-DURATION: 4s;
+  transform-style: preserve-3d;
+  animation: rotateRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+
+.head {
+  position: relative;
+  width: 6rem;
+  height: 4rem;
+  border-radius: 48% 53% 45% 55% / 79% 79% 20% 22%;
+  background: linear-gradient(to right, white 45%, gray);
+}
+
+.eyeChamber {
+  width: 4.5rem;
+  height: 2.75rem;
+  position: relative;
+  left: 50%;
+  top: 55%;
+  border-radius: 45% 53% 45% 48% / 62% 59% 35% 34%;
+  background-color: #0c203c;
+  box-shadow: 0px 0px 2px 2px white, inset 0px 0px 0px 2px black;
+  transform: translate(-50%, -50%);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+
+.eye {
+  width: 1.2rem;
+  height: 1.5rem;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.eye:first-child {
+  left: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(65deg, #15ca3f 0px, #0bd923 1px, rgb(19, 154, 7) 2px);
+  box-shadow: inset 0px 0px 5px #15a61f, 0px 0px 15px 1px #19b226;
+  transform: translate(0, -50%) rotate(-65deg);
+}
+
+.eye:nth-child(2) {
+  right: 12px;
+  top: 50%;
+  background: repeating-linear-gradient(-65deg, #0bd923  0px, #19b226 1px, white 2px);
+  box-shadow: inset 0px 0px 5px #05ea46, 0px 0px 15px 1px #0beb52;
+  transform: translate(0, -50%) rotate(65deg);
+}
+
+.body {
+  width: 6rem;
+  height: 8rem;
+  position: relative;
+  margin-block-start: 0.25rem;
+  border-radius: 47% 53% 45% 55% / 12% 9% 90% 88%;
+  background: linear-gradient(to right, white 35%, gray);
+}
+
+.hand {
+  position: absolute;
+  left: -1.5rem;
+  top: 0.75rem;
+  width: 2rem;
+  height: 5.5rem;
+  border-radius: 40%;
+  background: linear-gradient(to left, white 15%, gray);
+  box-shadow: 5px 0px 5px rgba(0, 0, 0, 0.25);
+  transform: rotateY(55deg) rotateZ(10deg);
+}
+
+.hand:first-child {
+  animation: compensateRotation var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+
+.hand:nth-child(2) {
+  left: 92%;
+  background: linear-gradient(to right, white 15%, gray);
+  transform: rotateY(55deg) rotateZ(-10deg);
+  animation: compensateRotationRight var(--EVA-ROTATION-DURATION) linear infinite alternate;
+}
+
+.scannerThing {
+  width: 0;
+  height: 0;
+  position: absolute;
+  left: 60%;
+  top: 10%;
+  border-top: 180px solid #19b226;
+  border-left: 250px solid transparent;
+  border-right: 250px solid transparent;
+  transform-origin: top left;
+  mask: linear-gradient(to right, white, transparent 35%);
+  animation: glow 2s cubic-bezier(0.86, 0, 0.07, 1) infinite;
+}
+
+.scannerOrigin {
+  position: absolute;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  left: 60%;
+  top: 10%;
+  background: #19b226;;
+  box-shadow: inset 0px 0px 5px rgba(0, 0, 0, 0.5);
+  animation: moveRight var(--EVA-ROTATION-DURATION) linear infinite;
+}
+
+@keyframes rotateRight {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(25deg);
+  }
+}
+
+@keyframes moveRight {
+  from {
+    transform: translate(-50%, -50%);
+  }
+  to {
+    transform: translate(-40%, -50%);
+  }
+}
+
+@keyframes compensateRotation {
+  from {
+    transform: rotateY(55deg) rotateZ(10deg);
+  }
+  to {
+    transform: rotatey(30deg) rotateZ(10deg);
+  }
+}
+
+@keyframes compensateRotationRight {
+  from {
+    transform: rotateY(55deg) rotateZ(-10deg);
+  }
+  to {
+    transform: rotateY(70deg) rotateZ(-10deg);
+  }
+}
+
+@keyframes glow {
+  from {
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  45% {
+    transform: rotate(-25deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.col-md-12{
+  display: flex;
+  flex-direction: column;
+  gap: 4.3rem;
+}
+
+@media screen and (max-width: 600px) {
+  .col-md-12{
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+  .total-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .transaction-graphic {
+    margin-top: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+/* Estilo para a mensagem de erro */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+}

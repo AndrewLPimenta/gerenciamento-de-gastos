@@ -5,7 +5,7 @@ import TotalAmount from '../components/TotalAmount'; // Componente de total de g
 import Header from '../components/Header';
 import Suggestion from '../components/Suggestion'; // Importe o componente Suggestion
 import '../index.css';
-import { Link } from 'react-router-dom';
+import Graphic from '../components/Graphic';
 
 function TransactionPage() {
     const [transactions, setTransactions] = useState([]);
@@ -43,11 +43,13 @@ function TransactionPage() {
                                     />
                                 </div>
                             </div>
-                            <div className="row">
+                            <div className="row-2">
                                 <div className="col-md-12">
                                     <TotalAmount transactions={transactions} />
+                                    <Graphic />
                                 </div>
                             </div>
+                            
                         </div>
                         <div >
                                 <div >
