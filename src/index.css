@@ -450,7 +450,7 @@ div.row{
   /* Em telas muito pequenas, como smartphones */
   .transaction-form-page {
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .inputGroup {
@@ -1143,4 +1143,74 @@ h2 {
   border-radius: 5px;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;
+}
+
+
+.suggestion-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000; /* Garantir que fique acima de outros conteúdos */
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 300px;
+}
+
+.suggestion {
+  background-color: #f0f8ff;
+  color: #333;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  transform: translateX(100%); /* Começa fora da tela */
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+/* Animação de entrada da sugestão */
+@keyframes slideIn {
+  0% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+  100% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+}
+
+/* Animação de saída da sugestão */
+@keyframes slideOut {
+  0% {
+      opacity: 1;
+      transform: translateX(0);
+  }
+  100% {
+      opacity: 0;
+      transform: translateX(100%);
+  }
+}
+
+/* Estilo do botão de fechar */
+.close-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.close-icon {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+/* Animação de hover no ícone de fechar */
+.close-icon:hover {
+  transform: scale(1.1);
 }

@@ -70,7 +70,7 @@ function TransactionForm({ addTransaction }) {
     return (
         <div className="transaction-form-page">
             <form className="form-inputs" onSubmit={handleSubmit}>
-                <h2>Cuide de suas Finanaças!</h2>
+                <h2>Cuide de suas Finanças!</h2>
 
                 {/* Exibição de erro */}
                 {error && <div className="error-message">{error}</div>}

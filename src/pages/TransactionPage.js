@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import TransactionForm from '../components/TransactionForm'; // Componente de formulário
-import TransactionList from '../components/TransactionList'; // Componente de lista de transações
-import TotalAmount from '../components/TotalAmount'; // Componente de total de gastos
+import TransactionForm from '../components/TransactionForm'; 
+import TransactionList from '../components/TransactionList'; 
+import TotalAmount from '../components/TotalAmount'; 
 import Header from '../components/Header';
-import Suggestion from '../components/Suggestion'; // Importe o componente Suggestion
+import Suggestion from '../components/Suggestion'; 
 import '../index.css';
 import Graphic from '../components/Graphic';
 
 function TransactionPage() {
     const [transactions, setTransactions] = useState([]);
-    const [menuOpen, setMenuOpen] = useState(false);  // Estado para controlar o menu
-    const [showSuggestion, setShowSuggestion] = useState(true); // Controle de visibilidade da sugestão
+    const [menuOpen, setMenuOpen] = useState(false);  
+    const [showSuggestion, setShowSuggestion] = useState(true); 
 
     const addTransaction = (transaction) => {
         setTransactions([...transactions, transaction]);
@@ -20,7 +20,6 @@ function TransactionPage() {
         setTransactions(transactions.filter((transaction) => transaction.id !== id));
     };
 
-    // Função para alternar o estado do menu
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
     };
@@ -49,23 +48,18 @@ function TransactionPage() {
                                     <Graphic />
                                 </div>
                             </div>
-                            
                         </div>
-                        <div >
-                                <div >
-                                </div>
-                            </div>
                     </section>
                 </div>
-            </div>
 
-            {/* Componente de sugestão */}
-            {showSuggestion && (
-                <Suggestion
-                    message="Lembre-se de adicionar suas despesas!"
-                    onClose={() => setShowSuggestion(false)} // Fecha a sugestão ao clicar no botão de fechar
-                />
-            )}
+                {/* Exibindo o componente Suggestion */}
+                {showSuggestion && (
+                    <Suggestion
+                        message="Lembre-se de adicionar suas despesas!"
+                        onClose={() => setShowSuggestion(false)} // Fecha a sugestão ao clicar no botão de fechar
+                    />
+                )}
+            </div>
         </main>
     );
 }
